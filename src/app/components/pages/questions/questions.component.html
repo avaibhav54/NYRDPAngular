@@ -1,0 +1,34 @@
+<mat-card>
+
+
+    <h1>Answer all the Questions</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form (ngSubmit)="formSubmit()">
+
+                    <mat-form-field *ngFor="let q of questions" appearance="outline" style="width: 100%;">
+        
+                        <mat-label>{{q.name}}</mat-label>
+                        <input required
+                         autofocus type="text" 
+                         name="title"
+                          id="" matInput
+                           placeholder="Enter Your Title"
+                           >
+                           </mat-form-field>
+               
+                
+                              <div class="text-center">
+                                <button mat-raised-button color="primary" type="submit">Add</button>
+                
+                            
+                                <button mat-raised-button color="accent" type="reset" style="margin-left: 20px;;">Clear</button>
+                
+                            </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</mat-card>
