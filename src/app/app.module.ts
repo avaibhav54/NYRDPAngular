@@ -18,6 +18,8 @@ import {HttpClientModule} from '@angular/common/http'
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HttpClientModule,
     MatCardModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSelectModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

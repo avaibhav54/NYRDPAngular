@@ -1,34 +1,66 @@
 <mat-card>
+  <h1>Answer all the Questions</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <form (ngSubmit)="formSubmit()">
+          <div *ngFor="let q of questions">
+            <mat-form-field
+              *ngIf="q.isOptionAvailable == 0"
+              appearance="outline"
+              style="width: 100%"
+            >
+              <mat-label>{{ q.id }}) {{ q.name }}</mat-label>
+              <input
+                autofocus
+                type="text"
+                name="title"
+                id=""
+                matInput
+                placeholder="Enter Your Title"
+              />
+            </mat-form-field>
 
+            <mat-form-field
+              *ngIf="q.type == 'select'"
+              appearance="outline"
+              style="width: 100%"
+            >
+              <mat-label>{{ q.id }}) {{ q.name }}</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let op of q.options">
+                  {{ op.label }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-    <h1>Answer all the Questions</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <form (ngSubmit)="formSubmit()">
+            <mat-form-field
+              *ngIf="q.type == 'radio'"
+              appearance="outline"
+              style="width: 100%"
+            >
+              <mat-label>{{ q.name }}</mat-label>
+              <mat-select>
+                <mat-option> option 1 </mat-option>
+                <mat-option> option 2 </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
-                    <mat-form-field *ngFor="let q of questions" appearance="outline" style="width: 100%;">
-        
-                        <mat-label>{{q.name}}</mat-label>
-                        <input required
-                         autofocus type="text" 
-                         name="title"
-                          id="" matInput
-                           placeholder="Enter Your Title"
-                           >
-                           </mat-form-field>
-               
-                
-                              <div class="text-center">
-                                <button mat-raised-button color="primary" type="submit">Add</button>
-                
-                            
-                                <button mat-raised-button color="accent" type="reset" style="margin-left: 20px;;">Clear</button>
-                
-                            </div>
+          <div class="text-center">
+            <button mat-raised-button color="primary" type="submit">Add</button>
 
-                </form>
-            </div>
-        </div>
+            <button
+              mat-raised-button
+              color="accent"
+              type="reset"
+              style="margin-left: 20px ;"
+            >
+              Clear
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </mat-card>
