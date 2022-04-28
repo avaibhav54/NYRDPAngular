@@ -1,1 +1,50 @@
-<p>summary works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 style="margin-top: 50px">Things in favour</h1>
+      <ul>
+        <div class="container" *ngFor="let res of results">
+          <div *ngIf="res.value >= 50">
+            <li>
+              <p>
+                {{ res.value }}% of the people selected
+                {{ res.optionValue }} are successful
+              </p>
+            </li>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <br /><br /><br />
+    <div class="col-md-6">
+      <h1 style="margin-top: 50px">Things Not in favour</h1>
+      <ul>
+        <div class="container" *ngFor="let res of results">
+          <div *ngIf="res.value < 50">
+            <li>
+              <p>
+                {{ 100 - res.value }}% of the people selected
+                {{ res.optionValue }} are unsuccessful
+              </p>
+            </li>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <div class="container">
+    <h1 style="margin-top: 50px">Graphs</h1>
+  </div>
+  <div class="container" *ngFor="let cd of chartData">
+    <div *ngIf="cd[0].value > 50">
+      <ngx-charts-pie-chart
+        [results]="cd"
+        [legend]="false"
+        [legendTitle]="'results'"
+        [view]="[1000, 300]"
+        [labels]="true"
+      >
+      </ngx-charts-pie-chart>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import baseURL from 'src/app/help';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ResultSummaryServiceService {
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  public getResultSummary(resId: any, optionId: any) {
+    return this.http.get(`${baseURL}/result/${resId}/${optionId}`);
+  }
 }

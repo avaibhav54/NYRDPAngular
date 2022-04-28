@@ -1,16 +1,20 @@
-<mat-card>
+<!-- <mat-card>
   <h1>Answer all the Questions</h1>
   <div class="container">
     <div class="row">
       <div class="col-md-8 offset-md-2">
         <form (ngSubmit)="formSubmit()">
-          <div *ngFor="let q of questions">
+          <div
+            *ngFor="let q of questions; let i = index"
+          >
+            <mat-label style="margin-bottom: 150"
+              >{{ q.id }}) {{ q.name }}</mat-label
+            >
             <mat-form-field
               *ngIf="q.isOptionAvailable == 0"
               appearance="outline"
               style="width: 100%"
             >
-              <mat-label>{{ q.id }}) {{ q.name }}</mat-label>
               <input
                 autofocus
                 type="text"
@@ -21,30 +25,11 @@
               />
             </mat-form-field>
 
-            <mat-form-field
-              *ngIf="q.type == 'select'"
-              appearance="outline"
-              style="width: 100%"
-            >
-              <mat-label>{{ q.id }}) {{ q.name }}</mat-label>
-              <mat-select>
-                <mat-option *ngFor="let op of q.options">
-                  {{ op.label }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field
-              *ngIf="q.type == 'radio'"
-              appearance="outline"
-              style="width: 100%"
-            >
-              <mat-label>{{ q.name }}</mat-label>
-              <mat-select>
-                <mat-option> option 1 </mat-option>
-                <mat-option> option 2 </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <div class="row" style="margin-top: 20px">
+              <div *ngFor="let op of q.options" class="col-md-6">
+                <input type="radio" [name]="'a' + i" />{{ op.label }}
+              </div>
+            </div>
           </div>
 
           <div class="text-center">
@@ -54,7 +39,7 @@
               mat-raised-button
               color="accent"
               type="reset"
-              style="margin-left: 20px ;"
+              style="margin-left: 20px"
             >
               Clear
             </button>
@@ -63,4 +48,130 @@
       </div>
     </div>
   </div>
-</mat-card>
+</mat-card> -->
+
+<!-- <mat-card *ngFor="let q of questions; let i = index" style="margin-top: 20px">
+  <mat-card-content>
+    <p>
+      Q{{ i + 1 }}) <span style="margin-left: 10px">{{ q.name }}</span>
+    </p>
+    <div class="row" style="margin-top: 20px">
+      <div *ngFor="let op of q.options" class="col-md-6">
+        <input type="radio" [name]="'a' + i" />{{ op.label }}
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card> -->
+<mat-paginator [hidden]="true" #paginator [length]="11" [pageSize]="3">
+</mat-paginator>
+
+<div class="bootstrap-wrapper">
+  <div class="container" *ngIf="questions && questions.length">
+    <div class="row">
+      <div class="col-12">
+        <ng-container>
+          <mat-card>
+            <h1 style="margin-top: 20px">Answer All the questions</h1>
+          </mat-card>
+        </ng-container>
+      </div>
+
+      <div class="col-12">
+        <!--  Question -->
+
+        <mat-card
+          *ngFor="
+            let q of questions
+              | slice
+                : paginator.pageIndex * paginator.pageSize
+                : (paginator.pageIndex + 1) * paginator.pageSize;
+            let i = index
+          "
+          style="margin-top: 20px"
+        >
+          <mat-card-content *ngIf="q.question.isOptionAvailable == 0">
+            <p>
+              Q{{ q.question.id }})
+              <span style="margin-left: 10px">{{ q.question.name }}</span>
+            </p>
+
+            <div class="row" style="margin-top: 20px">
+              <input
+                autofocus
+                type="text"
+                name="title"
+                id=""
+                matInput
+                placeholder="Enter here"
+              />
+            </div>
+          </mat-card-content>
+
+          <mat-card-content *ngIf="q.question.isOptionAvailable == 1">
+            <p>
+              Q{{ q.question.id }})
+              <span style="margin-left: 10px">{{ q.question.name }}</span>
+            </p>
+            <mat-divider> </mat-divider>
+            <div class="row" style="margin-top: 20px">
+              <mat-radio-group
+                aria-label="Select an option"
+                [formControl]="q.control"
+              >
+                <div *ngFor="let op of q.question.options" class="col-md-6">
+                  <mat-radio-button [name]="'a' + i" [value]="op.id">{{
+                    op.label
+                  }}</mat-radio-button>
+
+                  <!-- <input  [name]="'a' + i" type="radio" />{{ op.label }} -->
+                </div>
+              </mat-radio-group>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-6">
+        <button
+          *ngIf="paginator.pageIndex > 0"
+          mat-raised-button
+          color="primary"
+          (click)="handlePrev(paginator)"
+        >
+          Prev
+        </button>
+      </div>
+      <div class="col-6 text-end">
+        <button
+          *ngIf="
+            paginator.pageIndex < questions.length / paginator.pageSize - 1
+          "
+          mat-raised-button
+          color="primary"
+          (click)="handleNext(paginator)"
+        >
+          Next
+        </button>
+      </div>
+
+      <div
+        class="container text-center"
+        style="margin-top: 20px; margin-bottom: 20px"
+      >
+        <button
+          (click)="handleSaveUserDetails()"
+          *ngIf="
+            paginator.pageIndex >= questions.length / paginator.pageSize - 1
+          "
+          mat-raised-button
+          color="primary"
+        >
+          View Resolutions
+        </button>
+      </div>
+
+      <div class="col-md-2">
+        <!-- Progress -->
+      </div>
+    </div>
+  </div>
+</div>

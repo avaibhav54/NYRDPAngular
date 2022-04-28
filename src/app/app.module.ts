@@ -10,16 +10,21 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { QuestionsComponent } from './components/pages/questions/questions.component';
 import { ResolutionsComponent } from './components/pages/resolutions/resolutions.component';
 import { SummaryComponent } from './components/pages/summary/summary.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {HttpClientModule} from '@angular/common/http'
-import {MatCardModule} from '@angular/material/card';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,7 @@ import {MatRadioModule} from '@angular/material/radio';
     HomeComponent,
     QuestionsComponent,
     ResolutionsComponent,
-    SummaryComponent
+    SummaryComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,9 +49,15 @@ import {MatRadioModule} from '@angular/material/radio';
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDividerModule,
+    MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    NgxChartsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

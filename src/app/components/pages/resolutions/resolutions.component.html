@@ -1,1 +1,43 @@
-<p>resolutions works!</p>
+<div class="bootstrap-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <ng-container>
+          <mat-card>
+            <h1 style="margin-top: 20px">All Resolutions</h1>
+          </mat-card>
+        </ng-container>
+      </div>
+
+      <div class="col-12">
+        <!--  Question -->
+
+        <mat-card
+          *ngFor="let re of resolutions; let i = index"
+          style="margin-top: 20px"
+        >
+          <mat-card-content
+            style="cursor: pointer"
+            [routerLink]="'/result/' + re.id"
+          >
+            <p>
+              {{ re.id }})
+              <a style="margin-left: 10px"
+                >{{ re.name }} :: {{ re.family.name }}</a
+              >
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div
+        class="container text-center"
+        style="margin-top: 20px; margin-bottom: 20px"
+      ></div>
+
+      <div class="col-md-2">
+        <!-- Progress -->
+      </div>
+    </div>
+  </div>
+</div>
