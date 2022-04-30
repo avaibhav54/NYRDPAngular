@@ -1,0 +1,63 @@
+.res-card {
+  border-top: 3px solid;
+  height: 200px;
+}
+.Career {
+  border-color: #ff9800;
+}
+.Business {
+  border-color: #fbc02d;
+}
+.Relationships {
+  border-color: #0097a7;
+}
+.Health {
+  border-color: #303f9f;
+}
+.Life {
+  border-color: #795548;
+}
+.Self-Development {
+  border-color: #ff5252;
+}
+
+.res-description {
+  font-size: large;
+  color: #777;
+}
+.custom-shape-divider-bottom-1651308944 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  opacity: 0.3;
+}
+
+.custom-shape-divider-bottom-1651308944 svg {
+  position: relative;
+  display: block;
+  width: calc(150% + 1.3px);
+  height: 80px;
+}
+
+.Career .shape-fill {
+  fill: #ff9800;
+}
+
+.Business .shape-fill {
+  fill: #fbc02d;
+}
+.Relationships .shape-fill {
+  fill: #0097a7;
+}
+.Health .shape-fill {
+  fill: #303f9f;
+}
+.Life .shape-fill {
+  fill: #795548;
+}
+.Self-Development .shape-fill {
+  fill: #ff5252;
+}

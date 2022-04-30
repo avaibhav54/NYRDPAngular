@@ -1,32 +1,41 @@
 <div class="bootstrap-wrapper">
+  <div class="text-center p-5 bg-secondary">
+    <h1 style="margin-top: 20px; color: white">
+      Pick a resolution to view Insights
+    </h1>
+  </div>
   <div class="container">
     <div class="row">
-      <div class="col-12">
-        <ng-container>
-          <mat-card>
-            <h1 style="margin-top: 20px">All Resolutions</h1>
-          </mat-card>
-        </ng-container>
-      </div>
-
-      <div class="col-12">
+      <div *ngFor="let re of resolutions; let i = index" class="col-4">
         <!--  Question -->
 
         <mat-card
-          *ngFor="let re of resolutions; let i = index"
+          class="{{ re.family.name | replaceSpace }}"
+          [ngClass]="'text-center res-card position-relative'"
           style="margin-top: 20px"
         >
           <mat-card-content
             style="cursor: pointer"
-            [routerLink]="'/result/' + re.id"
+            [routerLink]="'/result/' + re.id + '/' + re.name"
           >
-            <p>
-              {{ re.id }})
-              <a style="margin-left: 10px"
-                >{{ re.name }} :: {{ re.family.name }}</a
-              >
+            <h2 class="text-center">{{ re.family.name }}</h2>
+            <p class="text-center res-description">
+              {{ re.name }}
             </p>
           </mat-card-content>
+          <div class="custom-shape-divider-bottom-1651308944">
+            <svg
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                class="shape-fill"
+              ></path>
+            </svg>
+          </div>
         </mat-card>
       </div>
 
@@ -41,3 +50,16 @@
     </div>
   </div>
 </div>
+
+<!-- <ng-template
+let-category="category"
+>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <h4>{{category}}</h4>
+      </div>
+      .col-12
+    </div>
+  </div>
+</ng-template> -->

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadQuestionsServiceService } from './load-questions-service.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { User } from 'src/app/shared/shared-models';
-import { questionControls } from './questions-model';
+import { ResHistory, User } from 'src/app/shared/shared-models';
+import { questionControls, ResHistoryControls } from './questions-model';
 import { FormControl } from '@angular/forms';
 import { UserService } from './user.service';
+import { LoadResolutionsService } from './load-resolutions.service';
 
 @Component({
   selector: 'app-questions',
@@ -17,10 +18,21 @@ export class QuestionsComponent implements OnInit {
     private questionservice: LoadQuestionsServiceService,
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private resolutionService: LoadResolutionsService
   ) {}
 
   questions = [] as Array<questionControls>;
+  resolutions = [
+    {
+      id: 1,
+      name: 'Give more effort at work',
+      family: {
+        id: 1,
+        name: 'Career',
+      },
+    },
+  ];
   // load metadata method call
   ngOnInit(): void {
     console.log('before calling function');
@@ -30,9 +42,22 @@ export class QuestionsComponent implements OnInit {
           let _questionControl = {} as questionControls;
           _questionControl.question = question;
           _questionControl.control = new FormControl();
+          if (question.isOptionAvailable === 2) {
+            _questionControl.resHistoryControl = [];
+          }
           console.log(_questionControl);
           return _questionControl;
         });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.resolutionService.loadResolutions().subscribe(
+      (data: any) => {
+        console.log(data);
+        this.resolutions = data;
       },
       (error) => {
         console.log(error);
@@ -83,6 +108,16 @@ export class QuestionsComponent implements OnInit {
       if (questionControl.question.id === 10) {
         userDetailsReq.freeTimeId = questionControl.control.value;
       }
+      if (questionControl.question.id === 11) {
+        userDetailsReq.history = questionControl.resHistoryControl.map(
+          (control) => {
+            let _resHistory = {} as ResHistory;
+            _resHistory.resolutionId = control.resolution.value;
+            _resHistory.successRateId = control.successRate.value;
+            return _resHistory;
+          }
+        );
+      }
     });
     sessionStorage.setItem('user', JSON.stringify(userDetailsReq));
     console.log(userDetailsReq);
@@ -91,5 +126,12 @@ export class QuestionsComponent implements OnInit {
       (error) => {}
     );
     this.router.navigate(['/resolutions']);
+  }
+
+  handleAddResHistoryControl(resHistoryControls: Array<ResHistoryControls>) {
+    let _resHistoryControls = {} as ResHistoryControls;
+    _resHistoryControls.resolution = new FormControl();
+    _resHistoryControls.successRate = new FormControl();
+    resHistoryControls.push(_resHistoryControls);
   }
 }

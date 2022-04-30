@@ -1,50 +1,64 @@
-<div class="container">
+<div class="text-center p-5 bg-secondary">
+  <h1 style="margin-top: 20px; color: white">Insights for {{ resName }}</h1>
+</div>
+<div class="container my-5">
   <div class="row">
     <div class="col-md-6">
-      <h1 style="margin-top: 50px">Things in favour</h1>
-      <ul>
-        <div class="container" *ngFor="let res of results">
-          <div *ngIf="res.value >= 50">
-            <li>
-              <p>
-                {{ res.value }}% of the people selected
-                {{ res.optionValue }} are successful
-              </p>
-            </li>
-          </div>
-        </div>
-      </ul>
+      <div class="container-fluid border py-3 rounded h-100">
+        <h1 class="success-head">Things in favour</h1>
+        <ul>
+          <ng-container *ngFor="let res of results">
+            <div *ngIf="res.value >= 50">
+              <li>
+                <p class="success-text">
+                  <b> {{ res.value }}%</b> of
+                  <b> {{ res.optionValue }} </b> were successful
+                </p>
+              </li>
+            </div>
+          </ng-container>
+        </ul>
+      </div>
     </div>
     <br /><br /><br />
     <div class="col-md-6">
-      <h1 style="margin-top: 50px">Things Not in favour</h1>
-      <ul>
-        <div class="container" *ngFor="let res of results">
-          <div *ngIf="res.value < 50">
-            <li>
-              <p>
-                {{ 100 - res.value }}% of the people selected
-                {{ res.optionValue }} are unsuccessful
-              </p>
-            </li>
-          </div>
-        </div>
-      </ul>
+      <div class="container-fluid border py-3 rounded h-100">
+        <h1 style="">Things Not in favour</h1>
+
+        <ul>
+          <ng-container *ngFor="let res of results">
+            <div *ngIf="res.value < 50">
+              <li>
+                <p class="fail-text">
+                  <b> {{ 100 - res.value }}% </b> of
+                  <b> {{ res.optionValue }}</b> were unsuccessful
+                </p>
+              </li>
+            </div>
+          </ng-container>
+        </ul>
+      </div>
     </div>
   </div>
   <div class="container">
     <h1 style="margin-top: 50px">Graphs</h1>
   </div>
-  <div class="container" *ngFor="let cd of chartData">
-    <div *ngIf="cd[0].value > 50">
-      <ngx-charts-pie-chart
-        [results]="cd"
-        [legend]="false"
-        [legendTitle]="'results'"
-        [view]="[1000, 300]"
-        [labels]="true"
-      >
-      </ngx-charts-pie-chart>
+  <div class="container-fluid">
+    <div class="row">
+      <ng-container *ngFor="let cd of chartData">
+        <div class="col-6" *ngIf="cd[0].value > 50">
+          <div>
+            <ngx-charts-pie-chart
+              [results]="cd"
+              [legend]="true"
+              [legendTitle]="'results'"
+              [labels]="true"
+              [customColors]="colorScheme"
+            >
+            </ngx-charts-pie-chart>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

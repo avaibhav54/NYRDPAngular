@@ -22,7 +22,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'result/:resid',
+    path: 'result/:resid/:name',
     component: SummaryComponent,
     pathMatch: 'full',
   },

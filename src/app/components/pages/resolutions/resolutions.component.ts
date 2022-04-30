@@ -19,6 +19,7 @@ export class ResolutionsComponent implements OnInit {
       },
     },
   ];
+
   ngOnInit(): void {
     this.resolutionService.loadResolutions().subscribe(
       (data: any) => {

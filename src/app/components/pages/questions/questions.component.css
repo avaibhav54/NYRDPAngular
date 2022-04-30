@@ -1,0 +1,31 @@
+.question-cont {
+}
+.question-label {
+  font-size: xx-large;
+  color: #878787;
+}
+.radio-label {
+  font-size: x-large;
+  color: #878787;
+}
+.radio-label ::ng-deep .mat-radio-container {
+  height: 30px;
+  width: 30px;
+}
+.radio-label ::ng-deep .mat-radio-outer-circle {
+  height: 30px;
+  width: 30px;
+}
+.radio-label ::ng-deep .mat-radio-inner-circle {
+  height: 30px;
+  width: 30px;
+}
+.radio-label ::ng-deep .mat-radio-button .mat-radio-ripple {
+  height: 20px; /*double of your required circle radius*/
+  width: 20px; /*double of your required circle radius*/
+  left: calc(50% - 10px); /*'10px'-same as your required circle radius*/
+  top: calc(50% - 10px); /*'10px'-same as your required circle radius*/
+}
+.mat-radio-button .mat-radio-outer-circle {
+  border-color: var(--primary) !important;
+}
